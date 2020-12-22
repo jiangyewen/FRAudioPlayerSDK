@@ -18,13 +18,13 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "10.0"
   spec.source       = { :git => "https://github.com/jiangyewen/FRAudioPlayerSDK.git", :branch => "master"} #:tag => "#{spec.version}" }
 
-  s.subspec 'source' do |ss|
+  spec.subspec 'source' do |ss|
     puts '.....FRAudioPlayerSDK..source........'
     ss.source_files = ["FRAudioPlayerSDK/**/*.{h,m,mm}"]
     ss.public_header_files = ["FRAudioPlayerSDK/**/*.h"]
   end
 
-  s.subspec 'framework' do |ss|
+  spec.subspec 'framework' do |ss|
     puts '------FRAudioPlayerSDK-binary-------'
     ss.ios.vendored_framework   = 'framework/FRAudioPlayerSDK.framework'
   end
