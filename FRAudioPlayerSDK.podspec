@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = "A audio player build on AVPlayer"
 
-  spec.homepage     = "https://github.com/jiangyewen/FRAudioPlayerSDK/FRAudioPlayerSDK.podspec"
+  spec.homepage     = "https://github.com/jiangyewen/FRAudioPlayerSDK/"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -76,7 +76,7 @@ Pod::Spec.new do |spec|
   #  Specify the location from where the source should be retrieved.
   #  Supports git, hg, bzr, svn and HTTP.
   #
-
+  spec.platform     = :ios, "10.0"
   spec.source       = { :git => "https://github.com/jiangyewen/FRAudioPlayerSDK.git", :tag => "#{spec.version}" }
 
 
@@ -88,7 +88,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
+  spec.source_files  = "FRAudioPlayerSDK", "FRAudioPlayerSDK/**/*.{h,m}"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
