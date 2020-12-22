@@ -1,0 +1,6 @@
+framework module FRAudioPlayerSDK {
+  umbrella header "FRAudioPlayerSDK.h"
+
+  export *
+  module * { export * }
+}

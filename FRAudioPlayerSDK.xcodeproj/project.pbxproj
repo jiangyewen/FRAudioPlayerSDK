@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		0150D11E259204FB009570E2 /* frameworkBuild */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0150D121259204FB009570E2 /* Build configuration list for PBXAggregateTarget "frameworkBuild" */;
+			buildPhases = (
+				0150D12525920503009570E2 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = frameworkBuild;
+			productName = frameworkBuild;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0150CFA52591DFFF009570E2 /* FRAudioPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0150CF9B2591DFFE009570E2 /* FRAudioPlayerSDK.framework */; };
 		0150CFAA2591DFFF009570E2 /* FRAudioPlayerSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150CFA92591DFFF009570E2 /* FRAudioPlayerSDKTests.m */; };
@@ -157,6 +171,9 @@
 					0150CFA32591DFFF009570E2 = {
 						CreatedOnToolsVersion = 12.3;
 					};
+					0150D11E259204FB009570E2 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 				};
 			};
 			buildConfigurationList = 0150CF952591DFFE009570E2 /* Build configuration list for PBXProject "FRAudioPlayerSDK" */;
@@ -174,6 +191,7 @@
 			targets = (
 				0150CF9A2591DFFE009570E2 /* FRAudioPlayerSDK */,
 				0150CFA32591DFFF009570E2 /* FRAudioPlayerSDKTests */,
+				0150D11E259204FB009570E2 /* frameworkBuild */,
 			);
 		};
 /* End PBXProject section */
@@ -194,6 +212,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0150D12525920503009570E2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n#!/bin/sh\nBUILD_DIR=\"${PROJECT_DIR}/build_result\"\nBUILD_ROOT=\"${PROJECT_DIR}/build_result\"\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\nWORKSPACE_NAME=${PROJECT_NAME}.xcodeproj\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${BUILD_DIR}\"\nrm -rf \"${BUILD_DIR}/*\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -project \"${WORKSPACE_NAME}\" -scheme \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphoneos ONLY_ACTIVE_ARCH=NO   BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -project \"${WORKSPACE_NAME}\" -scheme \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO EXCLUDED_ARCHS=\"arm64\"  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 3. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0150CF972591DFFE009570E2 /* Sources */ = {
@@ -278,7 +316,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -358,6 +396,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-all_load",
@@ -431,6 +470,24 @@
 			};
 			name = Release;
 		};
+		0150D11F259204FB009570E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CQH9X7FVS3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0150D120259204FB009570E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CQH9X7FVS3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +514,15 @@
 			buildConfigurations = (
 				0150CFB32591DFFF009570E2 /* Debug */,
 				0150CFB42591DFFF009570E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0150D121259204FB009570E2 /* Build configuration list for PBXAggregateTarget "frameworkBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0150D11F259204FB009570E2 /* Debug */,
+				0150D120259204FB009570E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

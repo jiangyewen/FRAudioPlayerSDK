@@ -88,8 +88,9 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "FRAudioPlayerSDK", "FRAudioPlayerSDK/**/*.{h,m}"
+  spec.source_files  = 'build_result/Debug-universal/FRAudioPlayerSDK.framework' #"FRAudioPlayerSDK", "FRAudioPlayerSDK/**/*.{h,m}"
   spec.exclude_files = "Classes/Exclude"
+  spec.vendored_frameworks = "build_result/Debug-universal/FRAudioPlayerSDK.framework"
 
   # spec.public_header_files = "Classes/**/*.h"
 
