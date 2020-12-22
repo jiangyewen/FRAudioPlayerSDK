@@ -10,7 +10,7 @@
 		0150CFA52591DFFF009570E2 /* FRAudioPlayerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0150CF9B2591DFFE009570E2 /* FRAudioPlayerSDK.framework */; };
 		0150CFAA2591DFFF009570E2 /* FRAudioPlayerSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150CFA92591DFFF009570E2 /* FRAudioPlayerSDKTests.m */; };
 		0150CFAC2591DFFF009570E2 /* FRAudioPlayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150CF9E2591DFFE009570E2 /* FRAudioPlayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0150CFBB2591E07D009570E2 /* FRAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150CFB92591E07D009570E2 /* FRAudioPlayer.h */; };
+		0150CFBB2591E07D009570E2 /* FRAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150CFB92591E07D009570E2 /* FRAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0150CFBC2591E07D009570E2 /* FRAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150CFBA2591E07D009570E2 /* FRAudioPlayer.m */; };
 /* End PBXBuildFile section */
 
