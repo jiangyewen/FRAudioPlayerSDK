@@ -28,7 +28,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:NULL];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:NULL];
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
     }
 
