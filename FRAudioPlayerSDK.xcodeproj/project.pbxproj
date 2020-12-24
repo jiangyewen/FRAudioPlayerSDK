@@ -26,7 +26,7 @@
 		0150CFAC2591DFFF009570E2 /* FRAudioPlayerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150CF9E2591DFFE009570E2 /* FRAudioPlayerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0150CFBB2591E07D009570E2 /* FRAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150CFB92591E07D009570E2 /* FRAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0150CFBC2591E07D009570E2 /* FRAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150CFBA2591E07D009570E2 /* FRAudioPlayer.m */; };
-		0150D22925946F53009570E2 /* FRAudioPlayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150D22725946F53009570E2 /* FRAudioPlayerManager.h */; };
+		0150D22925946F53009570E2 /* FRAudioPlayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150D22725946F53009570E2 /* FRAudioPlayerManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0150D22A25946F53009570E2 /* FRAudioPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150D22825946F53009570E2 /* FRAudioPlayerManager.m */; };
 /* End PBXBuildFile section */
 
@@ -119,8 +119,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0150D22925946F53009570E2 /* FRAudioPlayerManager.h in Headers */,
 				0150CFBB2591E07D009570E2 /* FRAudioPlayer.h in Headers */,
+				0150D22925946F53009570E2 /* FRAudioPlayerManager.h in Headers */,
 				0150CFAC2591DFFF009570E2 /* FRAudioPlayerSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
