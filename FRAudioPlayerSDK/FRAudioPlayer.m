@@ -213,7 +213,12 @@ static NSString *const kFRAudioPlayerItemKeyPathPlaybackLikelyToKeepUp = @"playb
 
 - (void)playerItemDidPlayToEnd:(NSNotification *)notification {
     if (notification.object == self.currentPlayerItem) {
-        [self stop];
+        if (self.loopPlay) {
+            [self seekToTime:0.f];
+            [self play];
+        } else {
+            [self stop];
+        }
     }
 }
 

@@ -30,6 +30,8 @@ typedef void(^FRAudioProgressChangedBlock)(CGFloat currentTime, CGFloat duration
 @property(nonatomic, strong, readonly) AVPlayerItem *currentPlayerItem;
 @property (readonly, strong, readonly) NSError *error;
 
+@property(nonatomic, assign) BOOL loopPlay;
+
 @property(nonatomic, copy) FRAudioStateChangedBlock stateChangedBlock;
 @property(nonatomic, copy) FRAudioProgressChangedBlock progressChangedBlock;
 - (void)playWithUrl:(NSURL *)url;
