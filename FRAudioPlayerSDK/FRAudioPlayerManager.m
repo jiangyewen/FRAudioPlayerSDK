@@ -52,6 +52,7 @@
     } else {
         [self stop];
         self.currentURL = url;
+        self.player = [[FRAudioPlayer alloc] init];
         [self.player playWithUrl:url];
     }
 }
