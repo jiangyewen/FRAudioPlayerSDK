@@ -51,6 +51,7 @@
         [self play];
     } else {
         [self stop];
+        self.currentURL = url;
         [self.player playWithUrl:url];
     }
 }
