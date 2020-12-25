@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) dispatch_block_t prevtTrackEventBlock;
 @property(nonatomic, strong, readonly) FRAudioPlayer *player;
 @property(nonatomic, assign, readonly) BOOL isPlaying;
+@property(nonatomic, strong, readonly) NSURL *currentURL;
 + (instancetype)sharedInstance;
 - (void)playWithUrl:(NSURL *)url;
 - (void)seekToTime:(CGFloat)seconds;

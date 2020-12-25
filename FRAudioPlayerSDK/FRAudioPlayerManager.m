@@ -11,7 +11,7 @@
 
 @interface FRAudioPlayerManager ()
 @property(nonatomic, strong) FRAudioPlayer *player;
-@property(nonatomic, copy) NSURL *currentURL;
+@property(nonatomic, strong) NSURL *currentURL;
 @end
 
 @implementation FRAudioPlayerManager
