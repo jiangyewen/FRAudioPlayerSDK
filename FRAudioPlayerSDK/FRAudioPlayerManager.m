@@ -27,11 +27,32 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:NULL];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:NULL];
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleAudioSessionInterruption:)
+                                                     name:AVAudioSessionInterruptionNotification
+                                                   object:nil];
     }
 
     return self;
+}
+
+- (void)handleAudioSessionInterruption:(NSNotification*)notification {
+    NSNumber *interruptionType = [[notification userInfo] objectForKey:AVAudioSessionInterruptionTypeKey];
+    NSNumber *interruptionOption = [[notification userInfo] objectForKey:AVAudioSessionInterruptionOptionKey];
+    switch (interruptionType.unsignedIntegerValue) {
+        case AVAudioSessionInterruptionTypeBegan: {
+            [self pause];
+        } break;
+        case AVAudioSessionInterruptionTypeEnded:{
+            if (interruptionOption.unsignedIntegerValue == AVAudioSessionInterruptionOptionShouldResume) {
+                [self.player play];
+            }
+        } break;
+        default:
+            break;
+    }
 }
 
 - (void)playWithUrl:(NSURL *)url {
@@ -46,6 +67,15 @@
         self.player = [[FRAudioPlayer alloc] init];
         [self.player playWithUrl:url];
     }
+}
+
+- (BOOL)isPlaying {
+    if (!_player) {
+        return  NO;
+    }
+    FRAudioPlayerState playState = self.player.state;
+    BOOL isPlaying = (playState == FRAudioPlayerStateBuffering || playState ==  FRAudioPlayerStatePlaying);
+    return isPlaying;
 }
 
 - (void)seekToTime:(CGFloat)seconds {
