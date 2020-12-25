@@ -7,6 +7,7 @@
 
 #import "FRAudioPlayer.h"
 #import "FRAudioPlayerManager.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface FRAudioPlayerManager ()
 @property(nonatomic, strong) FRAudioPlayer *player;
@@ -33,9 +34,21 @@
                                                  selector:@selector(handleAudioSessionInterruption:)
                                                      name:AVAudioSessionInterruptionNotification
                                                    object:nil];
+        
+        [self configRemoteControlEvent];
+        
+      
     }
 
     return self;
+}
+
+- (void)togglePlayAndPause {
+    if (self.isPlaying) {
+        [self pause];
+    } else {
+        [self play];
+    }
 }
 
 - (void)handleAudioSessionInterruption:(NSNotification*)notification {
@@ -93,5 +106,76 @@
 - (void)stop {
     [self.player stop];
     self.player = nil;
+}
+
+#pragma mark - remote control center and now playing
+- (void)configNowPlayingWithTitle:(NSString *)title artist:(NSString *)artist coverImage:(UIImage *)coverImage {
+    title = title.length > 0 ? title : @"";
+    artist = artist.length > 0 ? artist : @"";
+    MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithBoundsSize:CGSizeMake(100, 100)
+                                                                  requestHandler:^UIImage *_Nonnull(CGSize size) {
+                                                                      return coverImage;
+                                                                  }];
+    NSDictionary *info = @ {
+        MPMediaItemPropertyTitle : title,
+        MPMediaItemPropertyArtist : artist,
+        MPMediaItemPropertyArtwork : artwork,
+    };
+    [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = info;
+}
+
+- (void)configRemoteControlEvent {
+    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+    [commandCenter.togglePlayPauseCommand setEnabled:YES];
+    [commandCenter.playCommand setEnabled:YES];
+    [commandCenter.pauseCommand setEnabled:YES];
+    [commandCenter.nextTrackCommand setEnabled:YES];
+    [commandCenter.previousTrackCommand setEnabled:YES];
+    [commandCenter.togglePlayPauseCommand addTargetWithHandler: ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self togglePlayAndPause];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    [commandCenter.playCommand addTargetWithHandler: ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self play];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    [commandCenter.pauseCommand addTargetWithHandler: ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self pause];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    [commandCenter.nextTrackCommand addTargetWithHandler: ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        if (self.nextTrackEventBlock) {
+            self.nextTrackEventBlock();
+        }
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    [commandCenter.previousTrackCommand addTargetWithHandler: ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        if (self.prevtTrackEventBlock) {
+            self.prevtTrackEventBlock();
+        }
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    [commandCenter.stopCommand setEnabled:NO];
+    [commandCenter.skipForwardCommand setEnabled:NO];
+    [commandCenter.skipBackwardCommand setEnabled:NO];
+    [commandCenter.enableLanguageOptionCommand setEnabled:NO];
+    [commandCenter.disableLanguageOptionCommand setEnabled:NO];
+    [commandCenter.changeRepeatModeCommand setEnabled:NO];
+    [commandCenter.changePlaybackRateCommand setEnabled:NO];
+    [commandCenter.changeShuffleModeCommand setEnabled:NO];
+    // Seek Commands
+    [commandCenter.seekForwardCommand setEnabled:NO];
+    [commandCenter.seekBackwardCommand setEnabled:NO];
+    [commandCenter.changePlaybackPositionCommand setEnabled:NO];
+    
+    [commandCenter.ratingCommand setEnabled:NO];
+    [commandCenter.likeCommand setEnabled:NO];
+    [commandCenter.dislikeCommand setEnabled:NO];
+    [commandCenter.bookmarkCommand setEnabled:NO];
 }
 @end
