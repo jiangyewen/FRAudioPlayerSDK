@@ -14,7 +14,6 @@
 @end
 
 @implementation FRAudioPlayerManager
-@dynamic loopPlay;
 
 + (instancetype)sharedInstance {
     static id s_singletion;
@@ -33,14 +32,6 @@
     }
 
     return self;
-}
-
-- (void)setLoopPlay:(BOOL)loopPlay {
-    self.player.loopPlay = loopPlay;
-}
-
-- (BOOL)loopPlay {
-    return self.player.loopPlay;
 }
 
 - (void)playWithUrl:(NSURL *)url {

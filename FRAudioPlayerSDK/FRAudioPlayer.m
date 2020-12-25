@@ -29,10 +29,7 @@ static NSString *const kFRAudioPlayerItemKeyPathPlaybackLikelyToKeepUp = @"playb
 #pragma mark -dealloc
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if (self.progressObserver) {
-        [self.player removeTimeObserver:self.progressObserver];
-        self.progressObserver = nil;
-    }
+    [self stop];
 }
 
 //清空播放器监听属性
@@ -161,9 +158,8 @@ static NSString *const kFRAudioPlayerItemKeyPathPlaybackLikelyToKeepUp = @"playb
     self.loadedProgress = 0;
     self.duration = 0;
     self.currentTime = 0;
-
-    self.state = FRAudioPlayerStateStopped;
     [self.player pause];
+    self.state = FRAudioPlayerStateStopped;
     [self releasePlayer];
 }
 

@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FRAudioPlayerManager : NSObject
-@property(nonatomic, assign) BOOL loopPlay;
+@property(nonatomic, strong, readonly) FRAudioPlayer *player;
 
 + (instancetype)sharedInstance;
 - (void)playWithUrl:(NSURL *)url;
